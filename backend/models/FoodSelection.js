@@ -1,4 +1,4 @@
-// models/FoodSelection.js
+// models/UserFoodSelection.js
 const mongoose = require("mongoose");
 
 const userFoodSelectionSchema = new mongoose.Schema({
@@ -10,58 +10,13 @@ const userFoodSelectionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  breakfast: {
+  selectedMeal: {
     type: String,
     required: true,
   },
-  lunch: {
-    rice_varieties: {
-      type: String,
-    },
-    Veg_varieties: {
-      type: String,
-    },
-    nonVeg_varieties: {
-      type: String,
-    },
-    sides_varieties: {
-      type: String,
-    },
-    sweet_varieties: {
-      type: String,
-    },
-    drink_varieties: {
-      type: String,
-    },
-  },
-  dinner: {
-    rice_varieties: {
-      type: String,
-    },
-    Veg_varieties: {
-      type: String,
-    },
-    nonVeg_varieties: {
-      type: String,
-    },
-    sides_varieties: {
-      type: String,
-    },
-    sweet_varieties: {
-      type: String,
-    },
-    drink_varieties: {
-      type: String,
-    },
-    vegetable_varieties: {
-      type: String,
-    },
-    khichdi_varieties: {
-      type: String,
-    },
-    chinese_varieties: {
-      type: String,
-    },
+  selectedOption: {
+    type: String,
+    required: true,
   },
 });
 
