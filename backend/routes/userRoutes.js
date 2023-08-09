@@ -14,9 +14,13 @@ router.post("/signup", async (req, res) => {
 
   try {
     // Check if the email already exists in the database
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    const existingEmail = await User.findOne({ email });
+    if (existingEmail) {
       return res.status(400).json({ message: "Email already exists" });
+    }
+    const existingUser = await User.findOne({ name });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
     }
 
     const newUser = new User({ email, password, name });
@@ -30,6 +34,7 @@ router.post("/signup", async (req, res) => {
     await sendEmail(user.email,"Verify Emial",url);
     res.status(201).json({ message: "An Email sent to your account please verify" });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: "Server error" });
   }
 });

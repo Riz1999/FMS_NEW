@@ -61,7 +61,7 @@ const FoodComponent = () => {
         "http://localhost:5000/foodselection",
         data
       );
-      setSelectedVarieties({});
+      // setSelectedVarieties({});
       console.log(response.data.message); // Show success message in console or use it in your UI
     } catch (error) {
       console.error("Error saving food selection:", error);

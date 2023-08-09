@@ -4,15 +4,16 @@ const UserFoodSelection = require("../models/FoodSelection");
 
 // POST route to handle food selections
 router.post("/", async (req, res) => {
-  const { userId, selectedDay, selectedMeal, selectedOption } = req.body;
+  const { userId, selectedDay, breakfast, lunch, dinner } = req.body;
 
   try {
     // Create a new instance of the UserFoodSelection model with the user's food selection data
     const foodSelection = new UserFoodSelection({
       userId,
       selectedDay,
-      selectedMeal,
-      selectedOption,
+      breakfast,
+      lunch,
+      dinner,
     });
 
     // Save the food selection to the database

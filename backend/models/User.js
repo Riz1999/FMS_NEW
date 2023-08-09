@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  verified:{type:Boolean,default:false},
+  verified:{type:Boolean,default:true},
 });
 
 userSchema.pre("save", async function (next) {
