@@ -1,47 +1,46 @@
-var nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 function generateOTP() {
-          
-  // Declare a digits variable 
+  // Declare a digits variable
   // which stores all digits
-  var digits = '0123456789';
-  let OTP = '';
-  for (let i = 0; i < 4; i++ ) {
-      OTP += digits[Math.floor(Math.random() * 10)];
+  const digits = "0123456789";
+  let OTP = "";
+  for (let i = 0; i < 4; i++) {
+    OTP += digits[Math.floor(Math.random() * 10)];
   }
   return OTP;
 }
 
-let otp = generateOTP()
-
-
 module.exports = async (email, subject, text) => {
+  const otp = generateOTP(); // Generate the OTP when sending the email
 
-  var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'raveem80@gmail.com',
-      pass: 'dopxliaoryjthbjj'
-    }
-  });
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "raveem80@gmail.com",
+        pass: "dopxliaoryjthbjj",
+      },
+    });
 
-  var mailOptions = {
-    from: process.env.USER,
-    to: email,
-    subject: 'OTP(OneTimePassword)',
-    text: `To verifiy your account please enter "${otp}" as your(OneTimePassword)in our site`
-  };
+    const mailOptions = {
+      from: process.env.USER,
+      to: email,
+      subject: "OTP(OneTimePassword)",
+      text: `To verify your account, please enter "${otp}" as your OneTimePassword in our site`,
+    };
 
-  transporter.sendMail({
-    from: process.env.USER,
-    to: email,
-    subject: 'OTP(OneTimePassword)',
-    text: `To verifiy your account please enter "${otp}" as your(OneTimePassword)in our site`
-  }, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-  })
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
+
+    return otp; // Return the OTP value so it can be used in other parts of the application if needed
+  } catch (error) {
+    console.log("Email sending error: " + error);
+    throw error; // Rethrow the error to handle it in the calling function if needed
+  }
 };

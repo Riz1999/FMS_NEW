@@ -8,31 +8,14 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [otp, setOtp] = useState(""); // New state for OTP
   const [error, setError] = useState("");
-  const [showOtp, setShowOtp] = useState(false);
-  const [otp, setOtp] = useState("");
+  const [otpSent, setOtpSent] = useState(false); // To track if OTP is sent
 
   const handleToggleForm = () => {
-    if (showSignUp && showOtp) {
-      setShowOtp(false); // If the OTP section is visible and we want to toggle the form, hide the OTP section
-    } else {
-      setShowSignUp(!showSignUp);
-    }
+    setShowSignUp(!showSignUp);
     setError("");
   };
-  function generateOTP() {
-          
-    // Declare a digits variable 
-    // which stores all digits
-    var digits = '0123456789';
-    let OTP = '';
-    for (let i = 0; i < 4; i++ ) {
-        OTP += digits[Math.floor(Math.random() * 10)];
-    }
-    return OTP;
-  }
-
-  const otp1 = generateOTP() 
 
   const handleSignIn = async () => {
     try {
@@ -51,6 +34,7 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
       setError(error.response.data.message);
     }
   };
+
   const handleSignUp = async () => {
     // if (!email.endsWith("woxsen.edu.in")) {
     //   setError("Only woxsen.edu.in emails are supported.");
@@ -63,41 +47,28 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
         password,
       });
       console.log(response.data); // This should print the response from the server
-
-      // If the server sends an error message, set the error state and don't show the OTP section
-      if (response.data.message !== "User registered successfully") {
-        setError(response.data.message);
-      } else {
-        // If the server sends a "success" message after signup, show the OTP input field
-        setShowOtp(true);
-      }
+      setOtpSent(true); // Set otpSent to true after successful sign up
     } catch (error) {
       setError(error.response.data.message);
     }
   };
 
-  const handleOtpSubmit = async () => {
+  const handleOTPValidation = async () => {
     try {
-      // Make an API call to submit the OTP and complete the signup process
-      // You need to define the endpoint and the server's behavior to handle OTP verification.
-      // For this example, let's assume the endpoint is "/api/verify-otp".
       const response = await axios.post(
-        "http://localhost:5000/api/verify-otp",
+        "http://localhost:5000/api/otp/validate",
         {
           email,
           otp,
         }
       );
+      console.log(response.data); // This should print the response from the server
+      const { token, userId } = response.data;
 
-      // Handle the response accordingly, e.g., if the OTP is verified successfully, log in the user.
-      // If the server sends a token and user ID, save them to local storage or a state variable.
-      // For simplicity, let's assume the server sends a "success" message for verified OTP.
-      if (response.data.message === "success") {
-        // Save the token and user ID in local storage or a state variable
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", response.data.userId);
-        onLoginSuccess(); // Call the onLoginSuccess function passed as a prop
-      }
+      // Save the token and user ID in local storage or a state variable
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", userId);
+      onLoginSuccess(); // Call the onLoginSuccess function passed as a prop
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -130,9 +101,32 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
-          <button className="submit" type="button" onClick={handleSignIn}>
-            Sign In
-          </button>
+          {!otpSent && (
+            <button className="submit" type="button" onClick={handleSignIn}>
+              Sign In
+            </button>
+          )}
+          {otpSent && (
+            <>
+              <label className="label">
+                <span className="span">OTP</span>
+                <input
+                  className="input"
+                  type="text"
+                  name="otp"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                />
+              </label>
+              <button
+                className="submit"
+                type="button"
+                onClick={handleOTPValidation}
+              >
+                Validate OTP
+              </button>
+            </>
+          )}
           <p className="forgot-pass">Forgot Password ?</p>
           {error && <p className="error">{error}</p>}
         </div>
@@ -160,55 +154,59 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
               <span className="m-in">Sign In</span>
             </div>
           </div>
-          <div className="form sign-up">
-            <h2>Sign Up</h2>
-            <label className="label">
-              <span className="span">Name</span>
-              <input
-                className="input"
-                type="text"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </label>
-            <label className="label">
-              <span className="span">WOXSEN Mail</span>
-              <input
-                className="input"
-                type="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </label>
-            <label className="label">
-              <span className="span">Password</span>
-              <input
-                className="input"
-                type="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-            <label className="label">
-              <span className="span">Confirm Password</span>
-              <input
-                className="input"
-                type="password"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </label>
-
-            <button type="button" className="submit" onClick={handleSignUp}>
-              Sign Up Now
-            </button>
-            {error && <p className="error">{error}</p>}
-            {showOtp && (
-              <>
+          {showSignUp && !otpSent && (
+            <div className="form sign-up">
+              <h2>Sign Up</h2>
+              <label className="label">
+                <span className="span">Name</span>
+                <input
+                  className="input"
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </label>
+              <label className="label">
+                <span className="span">WOXSEN Mail</span>
+                <input
+                  className="input"
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </label>
+              <label className="label">
+                <span className="span">Password</span>
+                <input
+                  className="input"
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </label>
+              <label className="label">
+                <span className="span">Confirm Password</span>
+                <input
+                  className="input"
+                  type="password"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </label>
+              <button type="button" className="submit" onClick={handleSignUp}>
+                Sign Up Now
+              </button>
+              {error && <p className="error">{error}</p>}
+            </div>
+          )}
+          {showSignUp &&
+            otpSent && ( // Add this condition to show OTP validation form
+              <div className="form sign-up">
+                <h2>Verify Email</h2>
                 <label className="label">
                   <span className="span">Enter OTP</span>
                   <input
@@ -222,14 +220,13 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
                 <button
                   type="button"
                   className="submit"
-                  onClick={handleOtpSubmit}
+                  onClick={handleOTPValidation}
                 >
-                  Submit OTP
+                  Verify OTP
                 </button>
                 {error && <p className="error">{error}</p>}
-              </>
+              </div>
             )}
-          </div>
         </div>
       </div>
     </div>
