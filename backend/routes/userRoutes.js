@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 process.env.NODE_ENV = "development";
 // POST /api/signup
+const otpMap = new Map();
 router.post("/signup", async (req, res) => {
   const { email, password, name } = req.body;
 
@@ -36,9 +37,7 @@ router.post("/signup", async (req, res) => {
       "OTP(OneTimePassword)",
       "To verify your account please enter the OTP in our site"
     );
-    user.otp = otp;
-    await user.save();
-
+    otpMap.set(user._id.toString(), otp);
     console.log(otp);
 
     res
@@ -48,9 +47,6 @@ router.post("/signup", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
-// POST /api/login
-// server.js (continuation)
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -107,14 +103,19 @@ router.post("/otp/validate", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Compare the provided OTP with the OTP saved in the database for the user
-    if (otp !== user.otp) {
+    // Get OTP from cache using user's ID
+    const cachedOTP = otpMap.get(user._id.toString());
+
+    if (!cachedOTP || otp !== cachedOTP) {
       return res.status(400).json({ message: "Invalid OTP" });
     }
 
     // Mark the user as verified (you can add a verified field to your User model)
     user.verified = true;
     await user.save();
+    setTimeout(() => {
+      otpMap.delete(user._id.toString());
+    }, 600000);
 
     // Generate a JWT token for the user and send it as a response
     const token = jwt.sign({ userId: user._id }, "secretKey", {
