@@ -1,23 +1,23 @@
 //Breakfast
-var IdlyWada, MysoorBoonda, BagaraRice,Upma,Uthpam,PuriPoha,Dosa,AlooParatha,SproutsCornFlakes;
+const breakfast_item = { IdlyWada:0, MysoorBoonda:0, BagaraRice:0,Upma:0,Uthpam:0,PuriPoha:0,Dosa:0,AlooParatha:0,SproutsCornFlakes:0 };
 
 // Rice Lunch Varieties
-var CornPulao,CurdRice,BagaraRice,SambarRice,LemonRice;
+var CornPulao,CurdRice,SambarRice,LemonRice;
 
 //Veg Lunch Varieties
-var MoongDal,lalChana,VegBiryani,EggCurry;
+var MoongDal,lalChana,VegBiryani
 
-//NonVeg Lunch Varieties
-var ChickenCurry,RoganiChicken,BeerakayaCurry;
+//NonVeg Lunch Varieties for dinner also
+var ChickenCurry,RoganiChicken,BeerakayaCurry,EggCurry,EggBhurji;
 
-//Sides in Lunch
+//Sides in Lunch , Sides in Dinner
 var MangoPickle,GreenChatney;
 
 //Sweet Lunch Varieties
 var Semiyakheer,SujiKaHalwa,FruitCusturd,JibeGaja;
 
-//Drink Lunch Varieties
-var ButterMilk,Lemonjuice,MangoJuice,Rasna,Roohafza;
+//Drink Lunch Varieties and also for dinner
+var ButterMilk,Lemonjuice,MangoJuice,Rasna,Roohafza,Milk,VegSoup;
 
 // Dinner Plain Rice, Chapathi, Curd
 // Rice Dinner Varieties
@@ -27,14 +27,14 @@ var MasalaRice,VegFriedRice,EggFriedRice,Rice,LemonRice;
 //Dal in dinner
 var PalakDal,DalThadka,DalFry,TomatoDal,DalLasoni,MethiDal,MassorDal;
 
-//NonVeg Dinner Varieties
-var EggCurry,ChickenCurry,EggBhurji;
+// Vegetable Varieties in dinner
+var VegKofta,CabbagePorial,BeansTomato,CrispyVeg,TomatoOnionCurry,MirchyBhaji;
 
-//Sides in Dinner
-var MangoPickle,GreenChatney;
+//Khichdi Varieties
+var DalKhichdi,KhichdiKatta;
 
-//Sweet Dinner Varieties
-var Semiyakheer_d,SujiKaHalwa_d,FruitCusturd_d,JibeGaja_d;
+//Chinese Varieties
+var GobhiManchurianWet,VegNoodles;
 
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
@@ -62,6 +62,7 @@ const worksheet = workbook.addWorksheet('UserFoodData');
     const users = await db.collection('users').find().toArray();
     const foodSelected = await db.collection('userfoodselections').find().toArray();
 
+
     // Combine user and food data
     const combinedData = users.map(user => {
       const selectedFood = foodSelected.find(userfoodselection => userfoodselection.userId === user._id);
@@ -70,6 +71,9 @@ const worksheet = workbook.addWorksheet('UserFoodData');
       const lunch = foodSelected.map(userfoodselection => userfoodselection.lunch)
       const dinner = foodSelected.map(userfoodselection => userfoodselection.dinner)
 
+      if (breakfast === 'Idly/Wada') {
+        breakfast_item.IdlyWada = +1
+      };
 
       return {
         username: user.name,
