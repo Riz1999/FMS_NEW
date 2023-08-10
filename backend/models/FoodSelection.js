@@ -5,7 +5,7 @@ const userFoodSelectionSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User", // Reference to the User model,
-    unique: true,
+    
   },
   selectedDay: {
     type: String,
