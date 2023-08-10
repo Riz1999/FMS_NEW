@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import "./food.css";
 import axios from "axios";
 
 const FoodComponent = () => {
+  const [savedMessage, setSavedMessage] = useState("");
   const [selectedDay, setSelectedDay] = useState("monday"); // Default selected day is Monday
-
+  const [selectedDays, setSelectedDays] = useState([]);
   const handleDayChange = (event) => {
     setSelectedDay(event.target.value);
   };
@@ -29,7 +31,11 @@ const FoodComponent = () => {
         console.error("User ID missing.");
         return;
       }
-
+      console.log(selectedDays)
+      if (selectedDays.includes(selectedDay)) {
+        console.error("You have already selected food for this day.");
+        return;
+      }
       const data = {
         userId,
         selectedDay,
@@ -62,12 +68,30 @@ const FoodComponent = () => {
         data
       );
       // setSelectedVarieties({});
-      console.log(response.data.message); // Show success message in console or use it in your UI
+
+      setSelectedDays((prevSelectedDays) => [...prevSelectedDays, selectedDay]);
+      setSavedMessage("Food saved successfully!");
     } catch (error) {
       console.error("Error saving food selection:", error);
     }
+    
   };
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      console.error("User ID missing.");
+      return;
+    }
 
+    axios.get(`http://localhost:5000/foodselection/userSelectedDays/${userId}`)
+      .then(response => {
+        setSelectedDays(response.data.selectedDays);
+      })
+      .catch(error => {
+        console.error("Error fetching selected days:", error);
+      });
+  }, []);
+  
   const getMealDescription = () => {
     const mealDescriptions = {
       monday: {
@@ -2331,13 +2355,13 @@ const FoodComponent = () => {
           value={selectedDay}
           onChange={handleDayChange}
         >
-          <option value="monday">Monday</option>
-          <option value="tuesday">Tuesday</option>
-          <option value="wednesday">Wednesday</option>
-          <option value="thursday">Thursday</option>
-          <option value="friday">Friday</option>
-          <option value="saturday">Saturday</option>
-          <option value="sunday">Sunday</option>
+          <option value="monday" disabled={selectedDays.includes("monday")}>Monday</option>
+          <option value="tuesday" disabled={selectedDays.includes("tuesday")}>Tuesday</option>
+          <option value="wednesday" disabled={selectedDays.includes("wednesday")}>Wednesday</option>
+          <option value="thursday"  disabled={selectedDays.includes("thursday")}>Thursday</option>
+          <option value="friday"  disabled={selectedDays.includes("friday")}>Friday</option>
+          <option value="saturday"  disabled={selectedDays.includes("saturday")}>Saturday</option>
+          <option value="sunday"  disabled={selectedDays.includes("sunday")}>Sunday</option>
           {/* Add options for other days */}
         </select>
       </div>
@@ -2531,6 +2555,7 @@ const FoodComponent = () => {
           )}
         </div>
       )}
+         {savedMessage && <p>{savedMessage}</p>}
     </section>
   );
 };
