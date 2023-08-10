@@ -2,9 +2,10 @@
 const mongoose = require("mongoose");
 
 const userFoodSelectionSchema = new mongoose.Schema({
-  userName: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // Reference to the User model
+    ref: "User", // Reference to the User model,
+    unique: true,
   },
   selectedDay: {
     type: String,
@@ -63,6 +64,7 @@ const userFoodSelectionSchema = new mongoose.Schema({
       type: String,
     },
   },
+  count: { type: Number, default: 0 },
 });
 
 const UserFoodSelection = mongoose.model(
