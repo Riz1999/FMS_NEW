@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-//route to display the selected days for the user
+
 router.get("/userSelectedDays/:userId", async (req, res) => {
   const userId = req.params.userId;
 
@@ -33,7 +33,7 @@ router.get("/userSelectedDays/:userId", async (req, res) => {
     console.log("Received userId:", userId);
 
     // Query the database to find all user selections with the matching userId
-    const userSelections =  await UserFoodSelection.find({ _id: userId });
+    const userSelections =  await UserFoodSelection.find({  userId });
     console.log("User selections:", userSelections);
 
     // Extract selected days from user selections
@@ -52,4 +52,3 @@ router.get("/userSelectedDays/:userId", async (req, res) => {
 
 
 module.exports = router;
-
