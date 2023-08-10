@@ -2358,10 +2358,10 @@ const FoodComponent = () => {
           <option value="monday" disabled={selectedDays.includes("monday")}>Monday</option>
           <option value="tuesday" disabled={selectedDays.includes("tuesday")}>Tuesday</option>
           <option value="wednesday" disabled={selectedDays.includes("wednesday")}>Wednesday</option>
-          <option value="thursday"  disabled={selectedDays.includes("thursday")}>Thursday</option>
-          <option value="friday"  disabled={selectedDays.includes("friday")}>Friday</option>
-          <option value="saturday"  disabled={selectedDays.includes("saturday")}>Saturday</option>
-          <option value="sunday"  disabled={selectedDays.includes("sunday")}>Sunday</option>
+          <option value="thursday" disabled={selectedDays.includes("thursday")}>Thursday</option>
+          <option value="friday" disabled={selectedDays.includes("friday")}>Friday</option>
+          <option value="saturday" disabled={selectedDays.includes("saturday")}>Saturday</option>
+          <option value="sunday" disabled={selectedDays.includes("sunday")}>Sunday</option>
           {/* Add options for other days */}
         </select>
       </div>
