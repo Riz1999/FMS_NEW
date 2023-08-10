@@ -1,3 +1,41 @@
+//Breakfast
+var IdlyWada, MysoorBoonda, BagaraRice,Upma,Uthpam,PuriPoha,Dosa,AlooParatha,SproutsCornFlakes;
+
+// Rice Lunch Varieties
+var CornPulao,CurdRice,BagaraRice,SambarRice,LemonRice;
+
+//Veg Lunch Varieties
+var MoongDal,lalChana,VegBiryani,EggCurry;
+
+//NonVeg Lunch Varieties
+var ChickenCurry,RoganiChicken,BeerakayaCurry;
+
+//Sides in Lunch
+var MangoPickle,GreenChatney;
+
+//Sweet Lunch Varieties
+var Semiyakheer,SujiKaHalwa,FruitCusturd,JibeGaja;
+
+//Drink Lunch Varieties
+var ButterMilk,Lemonjuice,MangoJuice,Rasna,Roohafza;
+
+// Dinner Plain Rice, Chapathi, Curd
+// Rice Dinner Varieties
+var MasalaRice,VegFriedRice,EggFriedRice,Rice,LemonRice;
+
+
+//Dal in dinner
+var PalakDal,DalThadka,DalFry,TomatoDal,DalLasoni,MethiDal,MassorDal;
+
+//NonVeg Dinner Varieties
+var EggCurry,ChickenCurry,EggBhurji;
+
+//Sides in Dinner
+var MangoPickle,GreenChatney;
+
+//Sweet Dinner Varieties
+var Semiyakheer_d,SujiKaHalwa_d,FruitCusturd_d,JibeGaja_d;
+
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
 const ExcelJS = require('exceljs');

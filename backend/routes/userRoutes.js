@@ -29,20 +29,20 @@ router.post("/signup", async (req, res) => {
     }).save();
 
     const url = `${process.env.BASE_URL}users/${user._id}/verify/${token.token}`;
-    await sendEmail(user.email, "Verify Email", url);
+    // await sendEmail(user.email, "Verify Email", url);
 
     // Generate and send the OTP in the email
     const otp = await sendEmail(
       email,
-      "OTP(OneTimePassword)",
+      "Verify Email",
       "To verify your account please enter the OTP in our site"
     );
     otpMap.set(user._id.toString(), otp);
-    console.log(otp);
+    //console.log(otp);
 
     res
       .status(201)
-      .json({ message: "An Email sent to your account please verify", otp });
+      .json({ message: "An Email sent to your account please verify" });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
