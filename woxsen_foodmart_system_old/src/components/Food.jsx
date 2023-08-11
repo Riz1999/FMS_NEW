@@ -243,7 +243,7 @@ const FoodComponent = () => {
                   name: "Egg Fried Rice",
                 },
                 {
-                  name: " Rice",
+                  name: "Rice",
                 },
                 {
                   name: "Lemon Rice",
