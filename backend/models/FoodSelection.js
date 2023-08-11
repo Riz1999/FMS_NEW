@@ -64,7 +64,7 @@ const userFoodSelectionSchema = new mongoose.Schema({
       type: String,
     },
   },
-  count: { type: Number, default: 0 },
+
 });
 
 const UserFoodSelection = mongoose.model(
