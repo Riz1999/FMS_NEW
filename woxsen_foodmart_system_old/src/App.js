@@ -23,20 +23,15 @@ const App = () => {
 
   return (
     <div className="App">
-      {" "}
-      {/* Apply the "App" class here */}
-      {/* If the user is not logged in, show the SignInSignUpPage */}
       {!isLoggedIn && <SignInSignUpPage onLoginSuccess={handleLoginSuccess} />}
-      {/* If the user is logged in, show the main components */}
       {isLoggedIn && (
         <>
-          <Header />
+          <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           <Hero />
           <About />
           <FoodComponent />
           <Subscription />
           <Footer />
-          <button onClick={handleLogout}>Logout</button>
         </>
       )}
     </div>
@@ -44,3 +39,4 @@ const App = () => {
 };
 
 export default App;
+
