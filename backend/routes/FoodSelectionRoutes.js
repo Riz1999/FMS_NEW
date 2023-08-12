@@ -40,7 +40,8 @@ router.post("/", async (req, res) => {
       lunch,
       dinner,
     });
-    for(i in Items_count.length, i++){
+    const i = 0
+    for(i in Items_count.length){
       if(breakfast == Items_val[i]){
         Items_count[i] = Items_count[i]+1
       }
@@ -83,6 +84,7 @@ router.post("/", async (req, res) => {
       if(dinner.vegetable_varieties == Items_val[i]){
         Items_count[i] = Items_count[i]+1
       }
+      i++
     }
     
     // Save the food selection to the database

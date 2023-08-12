@@ -17,7 +17,7 @@ app.listen(PORT, () => {
 // mongodb
 const mongoose = require("mongoose");
 const mongoURI =
-  "mongodb+srv://sonalisadana1:sonalisadana@cluster0.ea2yqup.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://woxsenai:Ai%40l%40b2020@cluster0.yehbpjg.mongodb.net/";
 
 mongoose
   .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
