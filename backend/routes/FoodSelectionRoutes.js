@@ -8,7 +8,7 @@ var Items_count = [CornPulao=0,CurdRice=1,SambarRice=2,LemonRice=3,MoongDal=4,
   MasalaRice=34,VegFriedRice=35,EggFriedRice=36,Rice=37,LemonRice=38,
   PalakDal=39,DalThadka=40,DalFry=41,TomatoDal=42,DalLasoni=43,MethiDal=44,MassorDal=45,
   VegKofta=46,CabbagePorial=47,BeansTomato=48,CrispyVeg=49,TomatoOnionCurry=50,MirchyBhaji=51,
-  DalKhichdi=52,KhichdiKatta=53,Gobhi_Manchurian_Wet=54,VegNoodles=55];
+  DalKhichdi=52,KhichdiKatta=53,Gobhi_Manchurian_Wet=54,VegNoodles=55,selectedDay='monday'];// 56
 
 var Items_val = ['Corn Pulao','Curd Rice','Sambar Rice','Lemon Rice','Moong Dal',
   'lal Chana','Veg Biryani','Idly/Wada', 'Mysoor Boonda', 
@@ -84,8 +84,32 @@ router.post("/", async (req, res) => {
       if(dinner.vegetable_varieties == Items_val[i]){
         Items_count[i] = Items_count[i]+1
       }
+      if(dinner.khichdi_varieties == Items_val[i]){
+        Items_count[i] = Items_count[i]+1
+      }
+      if(dinner.chinese_varieties == Items_val[i]){
+        Items_count[i] = Items_count[i]+1
+      }
       i++
     }
+ 
+    var l = 0
+    
+    var famus_Items = []
+
+    if(selectedDay == Items_count[56]){
+      pass;
+    } else {
+      Items_count[56] = selectedDay
+    };
+
+    while(l < Items_count.length){
+      if(Items_count[l] > 4){
+        famus_Items.push(Items_val[l])
+      }
+    };
+    famus_Items.push(Items_count[56])
+    console.log(famus_Items,Items_count)
     
     // Save the food selection to the database
     await foodSelection.save();

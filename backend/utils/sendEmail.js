@@ -18,8 +18,8 @@ module.exports = async (email, subject, text) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "raveem80@gmail.com",
-        pass: "dopxliaoryjthbjj",
+        user: "woxsenailab@gmail.com",
+        pass: "gyiskiwbveubdxny",
       },
     });
 
