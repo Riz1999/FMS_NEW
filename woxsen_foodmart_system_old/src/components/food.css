@@ -161,3 +161,21 @@
 .next:hover {
   background-color: #7e0707;
 }
+
+.success-message {
+  background-color: #2ecc71;
+  color: #ffffff; 
+  padding: 20px; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 18px; 
+  max-width: 80%;
+  margin: 30px auto; 
+
+}
+.success-message:hover {
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); 
+}
+
