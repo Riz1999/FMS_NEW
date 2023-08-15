@@ -4,16 +4,23 @@ import "./food.css";
 import axios from "axios";
 
 const FoodComponent = () => {
+  const [selectedOptions, setSelectedOptions] = useState({});
   const [savedMessage, setSavedMessage] = useState("");
   const [selectedDay, setSelectedDay] = useState("monday"); // Default selected day is Monday
   const [selectedDays, setSelectedDays] = useState([]);
-  const handleDayChange = (event) => {
-    setSelectedDay(event.target.value);
-  };
-
+  const [submitted, setSubmitted] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState("breakfast");
 
   const [selectedVarieties, setSelectedVarieties] = useState({});
+  const handleDayChange = (event) => {
+    setSelectedDay(event.target.value);
+    setSubmitted(false);
+    setSelectedVarieties([]);
+    setSelectedMeal("breakfast");
+
+  };
+
+  
 
   const handleVarietyChange = (meal, variety) => {
     setSelectedVarieties((prevSelectedVarieties) => ({
@@ -70,10 +77,11 @@ const FoodComponent = () => {
       // setSelectedVarieties({});
 
       setSelectedDays((prevSelectedDays) => [...prevSelectedDays, selectedDay]);
-      setSavedMessage("Food saved successfully!");
+      setSavedMessage("Food saved successfully! Go to next day and select food");
     } catch (error) {
       console.error("Error saving food selection:", error);
     }
+    setSubmitted(true);
     
   };
   useEffect(() => {
@@ -2387,8 +2395,11 @@ const FoodComponent = () => {
         </button>
       </div>
 
-      {mealDescription && (
+      {submitted ? (<div className="success-message">
+          <p>{savedMessage}</p>
+        </div>) : (
         <div className="food-description">
+          
           {selectedMeal === "breakfast" && (
             <div>
               <div className="meal-cards">
@@ -2500,7 +2511,10 @@ const FoodComponent = () => {
               </button>
             </div>
           )}
-
+           {selectedDays.includes(selectedDay) ? (
+            <p>Already selected for this day</p>
+          ) : (
+            <>
           {selectedMeal === "dinner" && (
             <div>
               <div className="meal-cards">
@@ -2553,9 +2567,11 @@ const FoodComponent = () => {
               </button>
             </div>
           )}
+          </>
+          )}
         </div>
       )}
-         {savedMessage && <p>{savedMessage}</p>}
+         
     </section>
   );
 };
