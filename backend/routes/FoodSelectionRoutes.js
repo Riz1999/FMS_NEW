@@ -184,6 +184,7 @@ router.post("/", async (req, res) => {
             console.log('Array not found in the database');
           }
         }
+        result = await collection.findOne({});
         if(selectedDay == "tuesday"){
           if (result && result.Tuesday) {
             const arrayFromDb = result.Tuesday;
@@ -284,6 +285,7 @@ router.post("/", async (req, res) => {
             console.log('Array not found in the database');
           }
         }
+        result = await collection.findOne({});
         if(selectedDay == "wednesday"){
           if (result && result.Wednesday) {
             const arrayFromDb = result.Wednesday;
@@ -383,7 +385,8 @@ router.post("/", async (req, res) => {
           } else {
             console.log('Array not found in the database');
           }
-        }
+        };
+        result = await collection.findOne({});
         if(selectedDay == "thursday"){
           if (result && result.Thursday) {
             const arrayFromDb = result.Thursday;
@@ -483,7 +486,8 @@ router.post("/", async (req, res) => {
           } else {
             console.log('Array not found in the database');
           }
-        }
+        };
+        result = await collection.findOne({});
         if(selectedDay == "friday"){
           if (result && result.Friday) {
             const arrayFromDb = result.Friday;
@@ -583,7 +587,8 @@ router.post("/", async (req, res) => {
           } else {
             console.log('Array not found in the database');
           }
-        }
+        };
+        result = await collection.findOne({});
         if(selectedDay == "saturday"){
           if (result && result.Saturday) {
             const arrayFromDb = result.Saturday;
@@ -683,7 +688,8 @@ router.post("/", async (req, res) => {
           } else {
             console.log('Array not found in the database');
           }
-        }
+        };
+        result = await collection.findOne({});
         if(selectedDay == "sunday"){
           if (result && result.Sunday) {
             const arrayFromDb = result.Sunday;
