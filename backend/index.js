@@ -30,5 +30,5 @@ mongoose
 // Import and use the user routes
 const userRoutes = require("./routes/userRoutes");
 app.use("/api", userRoutes);
-const UserFoodSelection = require("./routes/FoodSelectionRoutes");
+const UserFoodSelection = require("./routes/FoodSelectionRoutes.js");
 app.use("/foodselection", UserFoodSelection);
