@@ -83,7 +83,7 @@ router.post("/", async (req, res) => {
     async function readAndValidateArray() {
       try {
         const collection = db.collection('famus_items');
-        const result = await collection.findOne({});
+        let result = await collection.findOne({});
 
         if(selectedDay == "monday"){
           if (result && result.Monday) {
@@ -174,17 +174,16 @@ router.post("/", async (req, res) => {
             famus_Items.push(selectedDay)
             console.log(famus_Items)
 
-              // Perform validations on array properties
-            if (Array.isArray(arrayFromDb) && arrayFromDb.length > 0) {
-              console.log('Array is valid:', arrayFromDb);
-            } else {
-              console.log('Array is invalid');
-            }
           } else {
             console.log('Array not found in the database');
           }
-        }
-        result = await collection.findOne({});
+        };
+      } catch (err) {
+        console.error('Error reading and validating array', err);
+      }
+      try {
+        const collection = db.collection('famus_items');
+        let result = await collection.findOne({});
         if(selectedDay == "tuesday"){
           if (result && result.Tuesday) {
             const arrayFromDb = result.Tuesday;
@@ -276,15 +275,17 @@ router.post("/", async (req, res) => {
             console.log(famus_Items)
 
               // Perform validations on array properties
-            if (Array.isArray(arrayFromDb) && arrayFromDb.length > 0) {
-              console.log('Array is valid:', arrayFromDb);
-            } else {
-              console.log('Array is invalid');
-            }
+
           } else {
             console.log('Array not found in the database');
           }
-        }
+        };
+      } catch (err) {
+        console.error('Error reading and validating array', err);
+      }
+      try {
+        const collection = db.collection('famus_items');
+        let result = await collection.findOne({});
         result = await collection.findOne({});
         if(selectedDay == "wednesday"){
           if (result && result.Wednesday) {
@@ -377,15 +378,16 @@ router.post("/", async (req, res) => {
             console.log(famus_Items)
 
               // Perform validations on array properties
-            if (Array.isArray(arrayFromDb) && arrayFromDb.length > 0) {
-              console.log('Array is valid:', arrayFromDb);
-            } else {
-              console.log('Array is invalid');
-            }
           } else {
             console.log('Array not found in the database');
           }
         };
+      } catch (err) {
+        console.error('Error reading and validating array', err);
+      }
+      try {
+        const collection = db.collection('famus_items');
+        let result = await collection.findOne({});
         result = await collection.findOne({});
         if(selectedDay == "thursday"){
           if (result && result.Thursday) {
@@ -477,17 +479,17 @@ router.post("/", async (req, res) => {
             famus_Items.push(selectedDay)
             console.log(famus_Items)
 
-              // Perform validations on array properties
-            if (Array.isArray(arrayFromDb) && arrayFromDb.length > 0) {
-              console.log('Array is valid:', arrayFromDb);
-            } else {
-              console.log('Array is invalid');
-            }
           } else {
             console.log('Array not found in the database');
           }
         };
-        result = await collection.findOne({});
+      } catch (err) {
+        console.error('Error reading and validating array', err);
+      }
+      try {
+        const collection = db.collection('famus_items');
+        let result = await collection.findOne({});
+        
         if(selectedDay == "friday"){
           if (result && result.Friday) {
             const arrayFromDb = result.Friday;
@@ -579,16 +581,16 @@ router.post("/", async (req, res) => {
             console.log(famus_Items)
 
               // Perform validations on array properties
-            if (Array.isArray(arrayFromDb) && arrayFromDb.length > 0) {
-              console.log('Array is valid:', arrayFromDb);
-            } else {
-              console.log('Array is invalid');
-            }
           } else {
             console.log('Array not found in the database');
           }
         };
-        result = await collection.findOne({});
+      } catch (err) {
+        console.error('Error reading and validating array', err);
+      }
+      try {
+        const collection = db.collection('famus_items');
+        let result = await collection.findOne({});
         if(selectedDay == "saturday"){
           if (result && result.Saturday) {
             const arrayFromDb = result.Saturday;
@@ -679,16 +681,16 @@ router.post("/", async (req, res) => {
             famus_Items.push(selectedDay)
             console.log(famus_Items)
 
-              // Perform validations on array properties
-            if (Array.isArray(arrayFromDb) && arrayFromDb.length > 0) {
-              console.log('Array is valid:', arrayFromDb);
-            } else {
-              console.log('Array is invalid');
-            }
           } else {
             console.log('Array not found in the database');
           }
         };
+      } catch (err) {
+        console.error('Error reading and validating array', err);
+      }
+      try {
+        const collection = db.collection('famus_items');
+        let result = await collection.findOne({});
         result = await collection.findOne({});
         if(selectedDay == "sunday"){
           if (result && result.Sunday) {
@@ -780,12 +782,6 @@ router.post("/", async (req, res) => {
             famus_Items.push(selectedDay)
             console.log(famus_Items)
 
-              // Perform validations on array properties
-            if (Array.isArray(arrayFromDb) && arrayFromDb.length > 0) {
-              console.log('Array is valid:', arrayFromDb);
-            } else {
-              console.log('Array is invalid');
-            }
           } else {
             console.log('Array not found in the database');
           }
