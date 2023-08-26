@@ -12,57 +12,16 @@ const userFoodSelectionSchema = new mongoose.Schema({
     required: true,
   },
   breakfast: {
-    type: String,
+    type: Array,
     required: true,
   },
   lunch: {
-    rice_varieties: {
-      type: String,
-    },
-    Veg_varieties: {
-      type: String,
-    },
-    nonVeg_varieties: {
-      type: String,
-    },
-    sides_varieties: {
-      type: String,
-    },
-    sweet_varieties: {
-      type: String,
-    },
-    drink_varieties: {
-      type: String,
-    },
+    type : Array,
+    require: true
   },
   dinner: {
-    rice_varieties: {
-      type: String,
-    },
-    Veg_varieties: {
-      type: String,
-    },
-    nonVeg_varieties: {
-      type: String,
-    },
-    sides_varieties: {
-      type: String,
-    },
-    sweet_varieties: {
-      type: String,
-    },
-    drink_varieties: {
-      type: String,
-    },
-    vegetable_varieties: {
-      type: String,
-    },
-    khichdi_varieties: {
-      type: String,
-    },
-    chinese_varieties: {
-      type: String,
-    },
+    type : Array,
+    require : true,
   },
 
 });
