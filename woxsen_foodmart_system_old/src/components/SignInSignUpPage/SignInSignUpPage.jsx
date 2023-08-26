@@ -36,10 +36,10 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
   };
 
   const handleSignUp = async () => {
-    // if (!email.endsWith("woxsen.edu.in")) {
-    //   setError("Only woxsen.edu.in emails are supported.");
-    //   return;
-    // }
+    if (!email.endsWith("woxsen.edu.in")) {
+      setError("Only woxsen.edu.in emails are supported.");
+      return;
+    }
     try {
       const response = await axios.post("http://localhost:5000/api/signup", {
         name,
