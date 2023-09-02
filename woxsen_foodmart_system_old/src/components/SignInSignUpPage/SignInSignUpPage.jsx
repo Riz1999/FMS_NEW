@@ -19,7 +19,7 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
 
   const handleSignIn = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/login", {
+      const response = await axios.post("https://a416-2a09-bac5-3b23-1a8c-00-2a5-bc.ngrok-free.app//api/login", {
         email,
         password,
       });
@@ -41,7 +41,7 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:5000/api/signup", {
+      const response = await axios.post("https://a416-2a09-bac5-3b23-1a8c-00-2a5-bc.ngrok-free.app//api/signup", {
         name,
         email,
         password,
@@ -56,7 +56,7 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
   const handleOTPValidation = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/otp/validate",
+        "https://a416-2a09-bac5-3b23-1a8c-00-2a5-bc.ngrok-free.app//api/otp/validate",
         {
           email,
           otp,

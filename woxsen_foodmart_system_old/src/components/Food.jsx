@@ -87,7 +87,7 @@ const [selectedDinnerVarieties, setSelectedDinnerVarieties] = useState([]);
       console.log(data);
 
       const response = await axios.post(
-        "http://localhost:5000/foodselection",
+        "https://a416-2a09-bac5-3b23-1a8c-00-2a5-bc.ngrok-free.app//foodselection",
         data
       );
       // setSelectedVarieties({});
@@ -107,7 +107,7 @@ const [selectedDinnerVarieties, setSelectedDinnerVarieties] = useState([]);
       return;
     }
   
-    axios.get(`http://localhost:5000/foodselection/userSelectedDays/${userId}`)
+    axios.get(`https://a416-2a09-bac5-3b23-1a8c-00-2a5-bc.ngrok-free.app//foodselection/userSelectedDays/${userId}`)
       .then(response => {
         setSelectedDays(response.data.selectedDays);
       })
