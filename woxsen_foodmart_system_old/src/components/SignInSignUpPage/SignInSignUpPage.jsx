@@ -12,6 +12,12 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
   const [error, setError] = useState("");
   const [otpSent, setOtpSent] = useState(false); // To track if OTP is sent
 
+  const config = {
+    headers: {
+      "ngrok-skip-browser-warning": true
+    }
+  }
+
   const handleToggleForm = () => {
     setShowSignUp(!showSignUp);
     setError("");
@@ -22,7 +28,7 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
       const response = await axios.post("https://a416-2a09-bac5-3b23-1a8c-00-2a5-bc.ngrok-free.app/api/login", {
         email,
         password,
-      });
+      }, config);
       console.log(response.data); // This should print the response from the server
       const { token, userId } = response.data;
 
@@ -45,7 +51,7 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
         name,
         email,
         password,
-      });
+      }, config);
       console.log(response.data); // This should print the response from the server
       setOtpSent(true); // Set otpSent to true after successful sign up
     } catch (error) {
@@ -60,7 +66,7 @@ const SignInSignUpPage = ({ onLoginSuccess }) => {
         {
           email,
           otp,
-        }
+        }, config
       );
       console.log(response.data); // This should print the response from the server
       const { token, userId } = response.data;

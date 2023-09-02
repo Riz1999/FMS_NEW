@@ -2,7 +2,11 @@
 import React, { useState, useEffect } from "react";
 import "./food.css";
 import axios from "axios";
-
+const config = {
+  headers : {
+    "ngrok-skip-browser-warning": true
+  }
+}
 const FoodComponent = () => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [savedMessage, setSavedMessage] = useState("");
@@ -62,6 +66,8 @@ const [selectedDinnerVarieties, setSelectedDinnerVarieties] = useState([]);
   
 
   const handleFoodSelection = async () => {
+    
+    
     try {
       // Retrieve the user ID from local storage or state variable
       const userId = localStorage.getItem("userId");
@@ -88,7 +94,8 @@ const [selectedDinnerVarieties, setSelectedDinnerVarieties] = useState([]);
 
       const response = await axios.post(
         "https://a416-2a09-bac5-3b23-1a8c-00-2a5-bc.ngrok-free.app/foodselection",
-        data
+        data,
+        config
       );
       // setSelectedVarieties({});
 
@@ -107,7 +114,7 @@ const [selectedDinnerVarieties, setSelectedDinnerVarieties] = useState([]);
       return;
     }
   
-    axios.get(`https://a416-2a09-bac5-3b23-1a8c-00-2a5-bc.ngrok-free.app/foodselection/userSelectedDays/${userId}`)
+    axios.get(`https://a416-2a09-bac5-3b23-1a8c-00-2a5-bc.ngrok-free.app/foodselection/userSelectedDays/${userId}`, config)
       .then(response => {
         setSelectedDays(response.data.selectedDays);
       })
