@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Subscription from "./components/Subscription";
 import FoodComponent from "./components/Food";
 import SignInSignUpPage from "./components/SignInSignUpPage/SignInSignUpPage";
+import FoodSelectionDisplay from "./components/FoodSelectionDislay";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,6 +31,7 @@ const App = () => {
           <Hero />
           <About />
           <FoodComponent />
+        <FoodSelectionDisplay/>
           <Subscription />
           <Footer />
         </>
