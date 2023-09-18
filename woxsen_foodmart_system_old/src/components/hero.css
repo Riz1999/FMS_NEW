@@ -1,4 +1,4 @@
-/* Default styles for desktop */
+
 .hero {
   display: flex;
   min-height: calc(100vh - 74px);
@@ -109,18 +109,18 @@
   object-fit: contain;
 }
 
-/* Responsive styles for smaller screens (e.g., tablet) */
+\
 @media (max-width: 1050px) {
   .hero-content-info h1 {
-    font-size: 60px; /* Adjust font size for smaller screens */
+    font-size: 60px; 
   }
 
   .hero-content-info p {
-    font-size: 16px; /* Adjust font size for smaller screens */
+    font-size: 16px;
   }
 
   .hero-content__buttons {
-    margin: 20px 0 0 20px; /* Adjust margin for smaller screens */
+    margin: 20px 0 0 20px; 
   }
   .hero-image {
     display:none;
@@ -140,25 +140,24 @@
   
 }
 
-/* Responsive styles for mobile screens */
 @media (max-width: 768px) {
   .hero {
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center elements horizontally */
+    flex-direction: column; 
+    align-items: center; 
   }
 
   .hero-image h2 {
-    font-size: 60px; /* Adjust font size for smaller screens */
-    padding: 10px; /* Adjust padding for smaller screens */
+    font-size: 60px; 
+    padding: 10px;
   }
 
   .hero-content-info {
-    padding: 20px; /* Adjust padding for smaller screens */
+    padding: 20px; 
   }
 
   .hero-content__buttons {
-    margin: 20px 0; /* Adjust margin for smaller screens */
-    justify-content: center; /* Center buttons horizontally */
+    margin: 20px 0;
+    justify-content: center; 
   }
   .hero-image {
     display:none;
